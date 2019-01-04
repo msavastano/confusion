@@ -39,7 +39,7 @@ class DishDetail extends Component {
                 return(
                     <div key={comment.id}>
                         <CardText>{comment.comment}</CardText>
-                        <CardText>-- {comment.author}, {comment.date}</CardText><br />
+                        <CardText>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</CardText><br />
                     </div>
                 )
                 
