@@ -4,7 +4,7 @@ import { Button, Card, CardImg, CardBody, CardTitle, CardText, Modal, ModalHeade
     Label, BreadcrumbItem, Breadcrumb, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-
+import { Loading } from './LoadingComponent';
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -41,7 +41,9 @@ class DishDetail extends Component {
     
     RenderDish() {
         //console.log(this.props.dish);
-        if(this.props.dish != null) {
+        if (this.props.dish != null) {
+
+        
             return(
                 <Card>
                     <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
@@ -61,6 +63,7 @@ class DishDetail extends Component {
         
     RenderComments() {
         // console.log(this.props.dish);
+        
         if(this.props.comments != null) {
             const comms = this.props.comments.map((comment) => {
                 console.log(comment)
@@ -90,6 +93,24 @@ class DishDetail extends Component {
 
     render(){
         // console.log(this.props);
+        if (this.props.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (this.props.errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{this.props.errMess}</h4>
+                    </div>
+                </div>
+            );
+        } else 
         if(this.props.dish) {     
             return (
                 <div className="container">
