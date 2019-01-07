@@ -25,8 +25,11 @@ class DishDetail extends Component {
     
 
     handleSubmit(values) {
-        console.log('Current Values are: ' + JSON.stringify(values));
-        alert('Current Values are: ' + JSON.stringify(values));
+        console.log(this.props.dishId)
+        this.toggleModal();
+        this.props.addComment(this.props.dish.id, values.rating, values.author, values.comment);
+        //console.log('Current Values are: ' + JSON.stringify(values));
+        //alert('Current Values are: ' + JSON.stringify(values));
         // event.preventDefault();
     }
 
@@ -37,7 +40,7 @@ class DishDetail extends Component {
     }
     
     RenderDish() {
-        console.log(this.props.dish);
+        //console.log(this.props.dish);
         if(this.props.dish != null) {
             return(
                 <Card>
@@ -57,7 +60,7 @@ class DishDetail extends Component {
     }
         
     RenderComments() {
-        console.log(this.props.dish);
+        // console.log(this.props.dish);
         if(this.props.comments != null) {
             const comms = this.props.comments.map((comment) => {
                 console.log(comment)
@@ -67,7 +70,6 @@ class DishDetail extends Component {
                         <CardText>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</CardText><br />
                     </div>
                 )
-                
             });
             return(
                 <Card>
@@ -116,9 +118,9 @@ class DishDetail extends Component {
                         <ModalBody>
                         <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                             <Row className="form-group">
-                                <Label htmlFor="yourname" md={2}>Your Name</Label>
+                                <Label htmlFor="author" md={2}>Your Name</Label>
                                 <Col md={10}>
-                                    <Control.text model=".yourname" id="yourname" name="yourname"
+                                    <Control.text model=".author" id="author" name="author"
                                         placeholder="Your Name"
                                         className="form-control"
                                         validators={{
@@ -127,7 +129,7 @@ class DishDetail extends Component {
                                     />
                                     <Errors
                                         className="text-danger"
-                                        model=".yourname"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required\n',
@@ -151,11 +153,11 @@ class DishDetail extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="message" md={2}>Your Feedback</Label>
+                                <Label htmlFor="comment" md={2}>Your Feedback</Label>
                                 <Col md={10}>
                                     <Control.textarea 
-                                        model=".message" 
-                                        id="message" name="message"
+                                        model=".comment" 
+                                        id="comment" name="comment"
                                         rows="12"
                                         className="form-control" />
                                 </Col>
