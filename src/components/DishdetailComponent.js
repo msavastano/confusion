@@ -27,7 +27,7 @@ class DishDetail extends Component {
     handleSubmit(values) {
         console.log(this.props.dishId)
         this.toggleModal();
-        this.props.addComment(this.props.dish.id, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dish.id, values.rating, values.author, values.comment);
         //console.log('Current Values are: ' + JSON.stringify(values));
         //alert('Current Values are: ' + JSON.stringify(values));
         // event.preventDefault();
