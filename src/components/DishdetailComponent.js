@@ -5,9 +5,11 @@ import { Button, Card, CardImg, CardBody, CardTitle, CardText, Modal, ModalHeade
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
+
 
 class DishDetail extends Component {
 
@@ -45,13 +47,19 @@ class DishDetail extends Component {
 
         
             return(
-                <Card>
-                    <CardImg top src={baseUrl + this.props.dish.image} alt={this.props.dish.name} /> />
-                    <CardBody>
-                        <CardTitle>{this.props.dish.name}</CardTitle>
-                        <CardText>{this.props.dish.description}</CardText>
-                    </CardBody>
-                </Card>
+                <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+            <Card>
+                <CardImg top src={baseUrl + this.props.dish.image} alt={this.props.dish.name} />
+                <CardBody>
+                    <CardTitle>{this.props.dish.name}</CardTitle>
+                    <CardText>{this.props.dish.description}</CardText>
+                </CardBody>
+            </Card>
+            </FadeTransform>
             )
         } else {
             return(
@@ -68,17 +76,21 @@ class DishDetail extends Component {
             const comms = this.props.comments.map((comment) => {
                 console.log(comment)
                 return(
-                    <div key={comment.id}>
-                        <CardText>{comment.comment}</CardText>
-                        <CardText>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</CardText><br />
-                    </div>
+                    <Fade in>
+                        <div key={comment.id}>
+                            <CardText>{comment.comment}</CardText>
+                            <CardText>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</CardText><br />
+                        </div>
+                    </Fade>
                 )
             });
             return(
                 <Card>
                     <CardTitle>Comments</CardTitle>
                         <CardBody>
-                            {comms}
+                            <Stagger in>
+                                {comms}
+                            </Stagger>
                         </CardBody>
                         
                     
