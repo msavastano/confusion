@@ -3,7 +3,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Button, Card, CardImg, CardBody, CardTitle, CardText, Modal, ModalHeader, ModalBody,
     Label, BreadcrumbItem, Breadcrumb, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -46,7 +46,7 @@ class DishDetail extends Component {
         
             return(
                 <Card>
-                    <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
+                    <CardImg top src={baseUrl + this.props.dish.image} alt={this.props.dish.name} /> />
                     <CardBody>
                         <CardTitle>{this.props.dish.name}</CardTitle>
                         <CardText>{this.props.dish.description}</CardText>
