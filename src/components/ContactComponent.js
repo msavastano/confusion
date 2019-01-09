@@ -14,11 +14,13 @@ class Contact extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    
 
     handleSubmit(values) {
-        console.log('Current Values are: ' + JSON.stringify(values));
-        alert('Current Values are: ' + JSON.stringify(values));
+        // console.log('Current Values are: ' + JSON.stringify(values));
+        // alert('Current Values are: ' + JSON.stringify(values));
+        // this.props.resetFeedbackForm();
+
+        this.props.postContact(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
         this.props.resetFeedbackForm();
         // event.preventDefault();
     }

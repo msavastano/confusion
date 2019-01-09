@@ -92,8 +92,6 @@ class DishDetail extends Component {
                                 {comms}
                             </Stagger>
                         </CardBody>
-                        
-                    
                 </Card>
             )
         } else {
